@@ -7,6 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @session('message')
+                <p class="bg-green-100 border-l-4 border-green-600 text-green-600 font-bold mb-4 p-2">
+                    {{ session('message') }}
+                </p>
+            @endsession
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __('Mis vacantes') }}
