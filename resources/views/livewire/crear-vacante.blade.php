@@ -1,60 +1,89 @@
-<form class="md:w-1/2 space-y-5" action="">
+<form class="md:w-1/2 space-y-5" wire:submit.prevent="crearVacante" novalidate>
     <!-- Título -->
     <div>
-        <x-input-label for="title" :value="__('Título')" />
-        <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required
+        <x-input-label for="titulo" :value="__('Título')" />
+        <x-text-input class="block mt-1 w-full" type="text" wire:model="titulo" :value="old('titulo')"
             placeholder="Título de la vacante" />
+
+        @error('titulo')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <!-- Descripción -->
     <div>
-        <x-input-label for="description" :value="__('Descripción de la vacante')" />
-        <textarea name="description" placeholder="Descripción de la vacante"
+        <x-input-label for="descripcion" :value="__('Descripción de la vacante')" />
+        <textarea wire:model="descripcion" placeholder="Descripción de la vacante"
             class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm h-44"></textarea>
+        @error('descripcion')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <!-- Salario -->
     <div>
-        <x-input-label for="income" :value="__('Salario mensual')" />
-        <select name="income" id="income"
+        <x-input-label for="salario" :value="__('Salario mensual')" />
+        <select wire:model="salario"
             class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-            <option value="" selected disabled>-- Selecciona un salario --</option>
+            <option value="" @selected(true) disabled>-- Selecciona un salario --</option>
             @foreach ($salarios as $salario)
                 <option value="{{ $salario->id }}">{{ $salario->salario }}</option>
             @endforeach
         </select>
+        @error('salario')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <!-- Categoría -->
     <div>
-        <x-input-label for="category" :value="__('Categoría')" />
-        <select name="category" id="category"
+        <x-input-label for="categoria" :value="__('Categoría')" />
+        <select wire:model="categoria"
             class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-            <option value="" selected disabled>-- Selecciona una categoría --</option>
+            <option value="" disabled>-- Selecciona una categoría --</option>
             @foreach ($categorias as $categoria)
                 <option value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
             @endforeach
+            @error('categoria')
+                <livewire:mostrar-alerta :message="$message" />
+            @enderror
         </select>
     </div>
 
     <!-- Empresa -->
     <div>
-        <x-input-label for="company" :value="__('Empresa')" />
-        <x-text-input id="company" class="block mt-1 w-full" type="text" name="company" :value="old('company')" required
+        <x-input-label for="empresa" :value="__('Empresa')" />
+        <x-text-input class="block mt-1 w-full" type="text" wire:model="empresa" :value="old('empresa')"
             placeholder="Empresa: Netflix, Uber, Shopify..." />
+        @error('empresa')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <!-- Último día para postularse -->
     <div>
-        <x-input-label for="lastday" :value="__('Último día para postularse')" />
-        <x-text-input id="lastday" class="block mt-1 w-full" type="date" name="lastday" :value="old('lastday')" required
+        <x-input-label for="ultimoDia" :value="__('Último día para postularse')" />
+        <x-text-input class="block mt-1 w-full" type="date" wire:model="ultimoDia" :value="old('ultimoDia')"
             placeholder="Empresa: Netflix, Uber, Shopify..." />
+        @error('ultimoDia')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <!-- Imagen -->
     <div>
-        <x-input-label for="image" :value="__('Imagen')" />
-        <x-text-input id="image" class="block mt-1 w-full" type="file" name="image" required />
+        <x-input-label for="imagen" :value="__('Imagen')" />
+        <x-text-input class="block mt-1 w-full" type="file" wire:model="imagen" accept="image/*" />
+
+        <div class="my-5">
+            @if ($imagen)
+                <img src="{{ $imagen->temporaryUrl() }}" alt="Preview">
+            @endif
+        </div>
+
+        @error('imagen')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <x-primary-button>
