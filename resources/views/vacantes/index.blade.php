@@ -13,7 +13,7 @@
                 </p>
             @endsession
 
-            <livewire:mostrar-vacante />
+            <livewire:mostrar-vacantes />
         </div>
     </div>
 </x-app-layout>
