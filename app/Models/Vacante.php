@@ -17,5 +17,6 @@ class Vacante extends Model
         'ultimo_dia',
         'imagen',
         'user_id',
+        'publicada'
     ];
 }
