@@ -5,7 +5,7 @@
             <div
                 class="p-4 text-gray-900 dark:text-gray-100 border-b border-gray-200 md:flex md:justify-between md:items-center">
                 <div class="leading-10">
-                    <p class="font-bold">{{ $vacante->titulo }}</p>
+                    <a href="{{ route('vacantes.show', $vacante->id) }}" class="font-bold">{{ $vacante->titulo }}</a>
                     <p class="text-sm text-gray-600 font-bold">{{ $vacante->empresa }}</p>
                     <p class="text-sm text-gray-500">Último día: {{ $vacante->ultimo_dia->format('Y/m/d') }}</p>
                 </div>

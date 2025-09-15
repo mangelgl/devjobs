@@ -19,4 +19,14 @@ class Vacante extends Model
         'user_id',
         'publicada'
     ];
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
+
+    public function salario()
+    {
+        return $this->belongsTo(Salario::class);
+    }
 }
