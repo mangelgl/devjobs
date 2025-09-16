@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Vacante extends Model
 {
+    use Notifiable;
+
     protected $casts = ['ultimo_dia' => 'date'];
 
     protected $fillable = [
@@ -33,5 +36,10 @@ class Vacante extends Model
     public function candidatos()
     {
         return $this->hasMany(Candidato::class);
+    }
+
+    public function reclutador()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

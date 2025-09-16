@@ -26,6 +26,15 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 @auth
+                    @if (Auth::user()->role == 2)
+                        <div class="flex justify-center items-center">
+                            <a href="{{ route('notificaciones') }}"
+                                class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex flex-col justify-center items-center text-sm font-extrabold text-white">
+                                {{ Auth::user()->unreadNotifications->count() }}
+                            </a>
+                        </div>
+                    @endif
+
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
@@ -109,7 +118,14 @@
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
 
+
                 <div class="mt-3 space-y-1">
+                    @if (Auth::user()->role == 2)
+                        <x-responsive-nav-link :href="route('notificaciones')" :class="'text-indigo-600'">
+                            {{ Auth::user()->unreadNotifications->count() }}
+                            @choice('Notificacion|Notificaciones', Auth::user()->unreadNotifications->count())
+                        </x-responsive-nav-link>
+                    @endif
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Editar perfil') }}
                     </x-responsive-nav-link>

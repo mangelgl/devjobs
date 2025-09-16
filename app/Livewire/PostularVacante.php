@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Notifications\NuevoCandidato;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -32,6 +33,14 @@ class PostularVacante extends Component
             'user_id' => Auth::user()->id,
             'cv' => $datos['cv'],
         ]);
+
+        $this->vacante->reclutador->notify(
+            new NuevoCandidato(
+                $this->vacante->id,
+                $this->vacante->titulo,
+                $this->vacante->user_id,
+            )
+        );
 
         return redirect()->back()->with('message', 'Se envió correctamente tu CV. ¡Mucha suerte!');
     }
