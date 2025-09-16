@@ -1,4 +1,7 @@
 <div>
+
+    <livewire:filtrar-vacantes />
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto">
             <h3 class="font-black text-4xl text-gray-800 mb-12">
